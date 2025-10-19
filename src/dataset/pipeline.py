@@ -100,3 +100,19 @@ class LogReturnPipeline(Pipeline):
         prices = np.cumprod(1 + returns, axis=0) * self.first_prices
         prices = np.nan_to_num(prices)
         return prices
+
+
+class StandardizingPipeline(Pipeline):
+    def __init__(self, scaler: Union[MinMaxScaler, StandardScaler]) -> None:
+        super(StandardizingPipeline, self).__init__()
+        self.scaler = scaler
+
+    def preprocess(self, values: np.ndarray) -> np.ndarray:
+        if not is_fitted(self.scaler):
+            self.scaler.fit(values)
+        transformed = self.scaler.transform(values)
+        return np.nan_to_num(transformed)
+
+    def inverse_transform(self, x: np.ndarray) -> np.ndarray:
+        inv = self.scaler.inverse_transform(x)
+        return np.nan_to_num(inv)

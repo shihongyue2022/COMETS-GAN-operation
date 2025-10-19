@@ -1,0 +1,22 @@
+name: nasdaq_pctret
+stock_names: ['AAPL', 'ABNB', 'ADBE', 'ADI', 'ADP', 'ADSK', 'AEP', 'AMAT', 'AMD', 'AMGN', 'AMZN', 'ASML', 'AVGO', 'AZN', 'BIIB', 'BKNG', 'BKR', 'CCEP', 'CDNS', 'CDW', 'CHTR', 'CMCSA', 'COST', 'CPRT', 'CRWD', 'CSCO', 'CSGP', 'CSX', 'CTAS', 'CTSH', 'DASH', 'DDOG', 'DLTR', 'DXCM', 'EA', 'EXC', 'FANG', 'FAST', 'FTNT', 'GILD', 'GOOG', 'GOOGL', 'HON', 'IDXX', 'ILMN', 'INTC', 'INTU', 'ISRG', 'KDP', 'KHC', 'KLAC', 'LIN', 'LRCX', 'LULU', 'MAR', 'MCHP', 'MDB', 'MDLZ', 'MELI', 'META', 'MNST', 'MRNA', 'MRVL', 'MSFT', 'MU', 'NFLX', 'NVDA', 'NXPI', 'ODFL', 'ON', 'ORLY', 'PANW', 'PAYX', 'PCAR', 'PDD', 'PEP', 'PYPL', 'QCOM', 'REGN', 'ROP', 'ROST', 'SBUX', 'SIRI', 'SNPS', 'TEAM', 'TMUS', 'TSLA', 'TTD', 'TTWO', 'TXN', 'VRSK', 'VRTX', 'WBA', 'WBD', 'WDAY', 'XEL', 'ZS']
+
+target_feature_price: mid_price
+target_feature_volume: null
+
+train:
+  _target_: dataset.dataset.StockDataset
+  path: data/nasdaq_pctret_train.csv
+  target_feature_price: ${dataset.target_feature_price}
+  target_feature_volume: ${dataset.target_feature_volume}
+  encoder_length: ${encoder_length}
+  decoder_length: ${decoder_length}
+  stock_names: ${dataset.stock_names}
+  stride: 1
+
+val:
+  _target_: dataset.dataset.StockDataset
+  path: data/nasdaq_pctret_val.csv
+  target_feature_price: ${dataset.target_feature_price}
+  target_feature_volume: ${dataset.target_feature_volume}
+  stock_names: ${dataset.stock_names}

@@ -17,3 +17,13 @@ discriminator:
   dropout: 0.2
 
 n_critic: 5
+
+metrics_probe:
+  enable: true
+  num_samples: 64
+  mc_mode: flatten
+  outdir: null
+  eval_dir: null
+  tag: null
+  predictor_name: COMETS-GAN
+  sampler_name: ""

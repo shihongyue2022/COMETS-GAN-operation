@@ -1,0 +1,14 @@
+_target_: dataset.datamodule.MyDataModule
+dataset_train: ${dataset.train}
+dataset_val: ${dataset.val}
+batch_size: ${batch_size}
+
+pipeline_price:
+  _target_: dataset.pipeline.StandardizingPipeline
+  scaler:
+    _target_: sklearn.preprocessing.StandardScaler
+
+pipeline_volume:
+  _target_: dataset.pipeline.StandardizingPipeline
+  scaler:
+    _target_: sklearn.preprocessing.StandardScaler
